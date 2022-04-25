@@ -87,7 +87,7 @@ const createTeam = () => {
                 addEngineer();
             } else if (userSelection.nextPerson === "Add Intern") {
                 addIntern();
-            } else (userSelection.nextPerson === "Done with my team") {
+            } else if (userSelection.nextPerson === "Done with my team") {
                 writeFile(generateHTML(teamMembers));
             }
         });

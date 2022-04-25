@@ -9,15 +9,35 @@ generateHTML = (data) => {
         if (data[i].role === "Intern") {
             team +=
             // Intern Card  
-            <div>
-
+            <div class="card">
+                <div class="card-header">
+                    <h3>Name ${data[i].getName()}</h3>
+                    <h5>Role ${data[i].getRole()}</h5>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>ID ${data[i].getId()}</li>
+                        <li>Email ${data[i].getEmail()}</li>
+                        <li>School ${data[i].getSchool()}</li>
+                    </ul>
+                </div>
             </div>
         }
         if (data[i].role === "Engineer") {
             team +=
             // Engineer Card
-            <div>
-
+            <div class="card">
+                <div class="card-header">
+                    <h3>Name ${data[i].getName()}</h3>
+                    <h5>Role ${data[i].getRole()}</h5>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>ID ${data[i].getId()}</li>
+                        <li>Email ${data[i].getEmail()}</li>
+                        <li>School ${data[i].getGithub()}</li>
+                    </ul>
+                </div>
             </div>
         }
     }
@@ -31,7 +51,7 @@ generateHTML = (data) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title> Team Profile Page </title>
-        <!--BULMA CSS LINK -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma-rtl.min.css">
         <!--CSS STYLESHEET LINK -->
     </head>
     <body>
@@ -40,12 +60,12 @@ generateHTML = (data) => {
         <div>
             <div>
                 <!-- Start Manager Card -->
-                <div>
-                    <div class="card header">
+                <div class="card">
+                    <div class="card-header">
                         <h3>${data[0].name}</h3>
-                        <h3>${data[0].role}</h3>
+                        <h5>${data[0].role}</h5>
                     </div>
-                    <div class="card body">
+                    <div class="card-content">
                         <ul>
                             <li>${data[0].id}</li>
                             <li>${data[0].email}</li>
@@ -66,19 +86,4 @@ generateHTML = (data) => {
     `
 }
 
-// writeFile function in challenge 9
-function writeFile (data) {
-    return new Promise((resolve, reject) => {
-        fs.writeFile("./index.html", generateHTML(data), (err) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve({ ok: true, message:"index.html created"});
-        });
-    });
-};
-
-module.exports = {
-    writeFile,
-};
+module.exports = generateHTML;
