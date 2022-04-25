@@ -1,26 +1,12 @@
-const ExpandPrompt = require("inquirer/lib/prompts/expand");
-const Manager = require("./lib/Manager");
+// Initialize team member array
+let teamMembers = [];
 
-// Set up a global variable for data
-// This will be where user input is stored and then called for generating the HTML
-let data = [];
-
-// Inquirer requirement
-const inquirer = require(inquirer)
-
-// writeFile requirement
-const { writeFile } = require("./src/generateHTML");
-
-// Manager requirement
-const Manager = require("./lib/Manager");
-
-// Engineer requirement
+// Node Module Requirements
+const inquirer = require(inquirer);
+const generateHTML = require("./src/generateHTML");
 const Engineer = require("./lib/Engineer");
-
-// Intern requirement
 const Intern = require("./lib/Intern");
-
-// Filesystem functionality
+const Manager = require("./lib/Manager");
 const fs = require("fs");
 
 // first 4 questions
@@ -83,50 +69,112 @@ const promptUser = () => {
             }
         },
     ])
-}
+};
 
+// Menu giving user options to select Intern, Manager, or Engineer to add as new Employee
 const createTeam = () => {
     inquirer
         .prompt([
             {
                 type: "lists",
-                name: "nextSteps",
+                name: "nextPerson",
                 message: "Please choose one of the following options:",
                 choices: ["Add Engineer", "Add Intern", "Done with my team"],
             },
         ])
         .then((userSelection) => {
-            if (userSelection.nextSteps === "Add Engineer") {
-                getEngineer(data);
-            } else if (userSelection.nextSteps === "Add Intern") {
-                getIntern(data)
-            } else if (userSelection.nextSteps === "Done with my team") {
-                endPrompt(data);
+            if (userSelection.nextPerson === "Add Engineer") {
+                addEngineer();
+            } else if (userSelection.nextPerson === "Add Intern") {
+                addIntern();
+            } else (userSelection.nextPerson === "Done with my team") {
+                writeFile(generateHTML(teamMembers));
             }
         });
 };
 
-// Function to getEngineer data
+// adds Engineer to data array
+function addEngineer() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter the Engineer's name"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter the Engineer's employee id"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter the Engineer's email address"
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "Enter the Engineer's github username"
+        }
+    ])
+    .then((data) => {
+        data.role = "Engineer";
+        teamMembers.push(new Engineer (data));
+        createTeam();
+    })
+};
 
-// Function to getIntern data
+// adds Intern to data array
+function addIntern() {
+    return inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "Enter the Intern's name"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter the Intern's employee id"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "Enter the Intern's email address"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "Enter the Intern's school"
+        }
+    ])
+    .then((data) => {
+        data.role = "Intern";
+        teamMembers.push(new Intern (data));
+        createTeam();
+    })
+};
 
-// End prompt is called to generate the data in a file then transitions to template.js
+// Writes an html file to dist folder
+const writeFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./dist/index.html', fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
 
-// Write File
+            resolve({
+                ok: true,
+                message: 'File created'
+            });
+        });
+    });
+};
 
 // promptUser call
-
-promptUser().then((answers) => {
-    const manager = new Manager({
-        name: answers.managerName,
-        id: answers.managerId,
-        email: answers.managerEmail,
-        officeNumber: answers.managerOffice,
-    });
-    data.push(manager);
-
+promptUser().then((data) => {
+    data.role = "Manager";
+    teamMembers.push(new Manager(data));
     createTeam();
 });
-
-// ADD TEAM ARRAY OBJECT
-// INTERPRET TEAM ARRAY OBJECT TO INTERPOLATE VARIABLES INTO generateHTML
