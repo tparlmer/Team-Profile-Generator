@@ -1,7 +1,5 @@
 const Manager = require('../lib/Manager');
 
-//ONLY NEED TO WRITE ADDITIONAL TESTS
-
 // Tests if class is able to be generated
 test('Tests if class is able to be generated', () => {
     const manager = new Manager();
@@ -15,23 +13,23 @@ test('Tests if class is able to be generated', () => {
 
 // officeNumber
 test('Tests manager officeNumber', () => {
-    const manager = new Manager('Tom','','tparlmer@gmail.com');
+    const officeNumber = '42069';
+    const manager = new Manager('Tom','','tparlmer@gmail.com', officeNumber);
 
     expect(manager.officeNumber).toBe('42069');
 });
 
 // getOfficeNumber()
 test('Tests getOfficeNumber() method', () => {
-    const testOfficeNumber = '42069'
-    const manager = new testOfficeNumber;
+    const testOfficeNumber = '42069';
+    const manager = new Manager('','','',testOfficeNumber);
 
-    expect(manager.getOfficeNumber()).toBe(testOfficeNumber);
+    expect(manager.getOfficeNumber()).toBe('42069');
 });
 
 // getRole() // Overridden to return 'Manager'
 test('Tests getRole() method', () => {
-    const testRole = 'manager'
-    const manager = testRole;
+    const manager = new Manager();
 
-    expect(manager.getRole()).toBe(testRole);
+    expect(manager.getRole()).toBe('Manager');
 });

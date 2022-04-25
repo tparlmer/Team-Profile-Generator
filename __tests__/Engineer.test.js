@@ -13,23 +13,24 @@ test('Tests if class is able to be generated', () => {
 
 // test github // GitHub username
 test('Tests github username', () => {
-    const engineer = new Engineer('Tom','githubber10');
+    const github = 'githubber10';
+    const engineer = new Engineer('Tom','','', github);
 
     expect(engineer.github).toBe('githubber10');
 });
 
 // test getGithub() method
 test('Tests getGithub() method', () => {
-    const testGithub = 'githubber10';
-    const engineer = new testGithub;
+    const github = 'githubber10';
+    const engineer = new Engineer('Tom','','', github);
 
-    expect(engineer.getGithub()).toBe(testGithub);
+    expect(engineer.getGithub()).toBe('githubber10');
 });
 
 // test getRole() // Overridden to return 'Engineer'
 test('Tests getRole() method', () => {
     const testRole = 'Engineer'
-    const engineer = testRole;
+    const engineer = new Engineer('','','',testRole);
 
-    expect(engineer.getRole()).toBe(testRole);
+    expect(engineer.getRole()).toBe('Engineer');
 });

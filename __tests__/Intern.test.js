@@ -11,7 +11,8 @@ test('Tests if class is able to be generated', () => {
 
 // school
 test('Tests intern school', () => {
-    const intern = new Intern('Tom','','tparlmer@gmail.com');
+    const school = 'Grand Canyon University';
+    const intern = new Intern('Tom','','tparlmer@gmail.com', school);
 
     expect(intern.school).toBe('Grand Canyon University');
 });
@@ -19,15 +20,15 @@ test('Tests intern school', () => {
 // getSchool()
 test('Tests getSchool() method', () => {
     const testSchool = 'Grand Canyon University'
-    const intern = new testSchool;
+    const intern = new Intern('','','',testSchool);
 
-    expect(intern.getSchool()).toBe(testSchool);
+    expect(intern.getSchool()).toBe('Grand Canyon University');
 });
 
 // getRole() // Overridden to return 'Intern'
 test('Tests getRole() method', () => {
     const testRole = 'intern'
-    const intern = testRole;
+    const intern = new Intern();
 
-    expect(intern.getRole()).toBe(testRole);
+    expect(intern.getRole()).toBe('Intern');
 });
