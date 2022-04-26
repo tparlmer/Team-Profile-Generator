@@ -1,13 +1,13 @@
-// Initialize team member array
-let teamMembers = [];
-
 // Node Module Requirements
-const inquirer = require(inquirer);
+const inquirer = require("inquirer");
 const generateHTML = require("./src/generateHTML");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const fs = require("fs");
+
+// Initialize team member array
+let teamMembers = [];
 
 // first 4 questions
 const promptUser = () => {
@@ -30,7 +30,7 @@ const promptUser = () => {
         {
             type: "input",
             name: "managerId",
-            message: "Enter your Team Manager's name",
+            message: "Enter your Team Manager's ID",
             validate: (nameInput) => {
                 if (nameInput) {
                     return true;
@@ -44,7 +44,7 @@ const promptUser = () => {
         {
             type: "input",
             name: "managerEmail",
-            message: "Enter your Team Manager's name",
+            message: "Enter your Team Manager's email",
             validate: (nameInput) => {
                 if (nameInput) {
                     return true;
@@ -58,7 +58,7 @@ const promptUser = () => {
         {
             type: "input",
             name: "officeNumber",
-            message: "Enter your Team Manager's name",
+            message: "Enter your Team Manager's office number",
             validate: (nameInput) => {
                 if (nameInput) {
                     return true;

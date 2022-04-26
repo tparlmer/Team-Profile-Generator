@@ -1,4 +1,4 @@
-const data = require('./index.js');
+const data = require('../index');
 const fs = require('fs');
 
 generateHTML = (data) => {
@@ -8,7 +8,8 @@ generateHTML = (data) => {
     for (let i = 1; i < data.length; i++) {
         if (data[i].role === "Intern") {
             team +=
-            // Intern Card  
+            // Intern Card
+            `
             <div class="card">
                 <div class="card-header">
                     <h3>Name ${data[i].getName()}</h3>
@@ -22,10 +23,12 @@ generateHTML = (data) => {
                     </ul>
                 </div>
             </div>
+            `
         }
         if (data[i].role === "Engineer") {
             team +=
             // Engineer Card
+            `
             <div class="card">
                 <div class="card-header">
                     <h3>Name ${data[i].getName()}</h3>
@@ -39,6 +42,7 @@ generateHTML = (data) => {
                     </ul>
                 </div>
             </div>
+            `
         }
     }
     
