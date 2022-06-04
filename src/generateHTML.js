@@ -2,6 +2,7 @@ const data = require('../index');
 const fs = require('fs');
 
 generateHTML = (data) => {
+    console.log({data});
     var team = ``;
     
     // Manager data is retrieved from the zero index of the array
@@ -11,15 +12,13 @@ generateHTML = (data) => {
             // Intern Card
             `
             <div class="card">
-                <div class="card-header">
-                    <h3>Name ${data[i].getName()}</h3>
-                    <h5>Role ${data[i].getRole()}</h5>
-                </div>
                 <div class="card-content">
-                    <ul>
-                        <li>ID ${data[i].getId()}</li>
-                        <li>Email ${data[i].getEmail()}</li>
-                        <li>School ${data[i].getSchool()}</li>
+                    <ul> 
+                        <li>Name: ${data[i].getName()}</li>
+                        <li>Role: ${data[i].getRole()}</li>
+                        <li>ID: ${data[i].getId()}</li>
+                        <li>Email: ${data[i].getEmail()}</li>
+                        <li>School: ${data[i].getSchool()}</li>
                     </ul>
                 </div>
             </div>
@@ -30,15 +29,13 @@ generateHTML = (data) => {
             // Engineer Card
             `
             <div class="card">
-                <div class="card-header">
-                    <h3>Name ${data[i].getName()}</h3>
-                    <h5>Role ${data[i].getRole()}</h5>
-                </div>
                 <div class="card-content">
                     <ul>
-                        <li>ID ${data[i].getId()}</li>
-                        <li>Email ${data[i].getEmail()}</li>
-                        <li>School ${data[i].getGithub()}</li>
+                        <li>Name: ${data[i].getName()}</li>
+                        <li>Role: ${data[i].getRole()}</li>
+                        <li>ID: ${data[i].getId()}</li>
+                        <li>Email: ${data[i].getEmail()}</li>
+                        <li>School: ${data[i].getGithub()}</li>
                     </ul>
                 </div>
             </div>
@@ -46,8 +43,7 @@ generateHTML = (data) => {
         }
     }
     
-    return 
-    `
+    return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -59,21 +55,19 @@ generateHTML = (data) => {
         <!--CSS STYLESHEET LINK -->
     </head>
     <body>
-    // interpolate variables into card deck
+
     <div>
         <div>
             <div>
                 <!-- Start Manager Card -->
                 <div class="card">
-                    <div class="card-header">
-                        <h3>${data[0].name}</h3>
-                        <h5>${data[0].role}</h5>
-                    </div>
                     <div class="card-content">
                         <ul>
-                            <li>${data[0].id}</li>
-                            <li>${data[0].email}</li>
-                            <li>${data[0].officeNumber}</li>
+                            <li>Name: ${data[0].getName()}</li>
+                            <li>Role: ${data[0].getRole()}</li>
+                            <li>ID: ${data[0].getId()}</li>
+                            <li>Email: ${data[0].getEmail()}</li>
+                            <li>Office Number: ${data[0].getOfficeNumber()}</li>
                         </ul>
                     </div>
                 </div>

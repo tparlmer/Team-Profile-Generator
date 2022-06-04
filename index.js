@@ -15,7 +15,7 @@ const promptUser = () => {
         //Question 1: Team Manager Name
         {
             type: "input",
-            name: "managerName",
+            name: "name",
             message: "Enter your Team Manager's name",
             validate: (nameInput) => {
                 if (nameInput) {
@@ -29,7 +29,7 @@ const promptUser = () => {
         //Question 2: Team Manager employee ID
         {
             type: "input",
-            name: "managerId",
+            name: "id",
             message: "Enter your Team Manager's ID",
             validate: (nameInput) => {
                 if (nameInput) {
@@ -43,7 +43,7 @@ const promptUser = () => {
         //Question 3: Team Manager email address
         {
             type: "input",
-            name: "managerEmail",
+            name: "email",
             message: "Enter your Team Manager's email",
             validate: (nameInput) => {
                 if (nameInput) {
@@ -76,7 +76,7 @@ const createTeam = () => {
     inquirer
         .prompt([
             {
-                type: "lists",
+                type: "list",
                 name: "nextPerson",
                 message: "Please choose one of the following options:",
                 choices: ["Add Engineer", "Add Intern", "Done with my team"],
@@ -119,7 +119,7 @@ function addEngineer() {
     ])
     .then((data) => {
         data.role = "Engineer";
-        teamMembers.push(new Engineer (data));
+        teamMembers.push(new Engineer (data.name, data.id, data.email, data.github));
         createTeam();
     })
 };
@@ -150,7 +150,7 @@ function addIntern() {
     ])
     .then((data) => {
         data.role = "Intern";
-        teamMembers.push(new Intern (data));
+        teamMembers.push(new Intern (data.name, data.id, data.email, data.school));
         createTeam();
     })
 };
@@ -174,7 +174,8 @@ const writeFile = fileContent => {
 
 // promptUser call
 promptUser().then((data) => {
+    console.log("promptUser", {data})
     data.role = "Manager";
-    teamMembers.push(new Manager(data));
+    teamMembers.push(new Manager(data.name, data.id, data.email, data.officeNumber));
     createTeam();
 });
